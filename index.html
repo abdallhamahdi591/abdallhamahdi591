@@ -1,0 +1,2602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تراث السودان | Sudan Heritage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --dark-moss-green: #606c38;
+            --pakistan-green: #283618;
+            --cornsilk: #fefae0;
+            --earth-yellow: #dda15e;
+            --tigers-eye: #bc6c25;
+            --arabic-font: 'Noto Naskh Arabic', serif;
+            --english-font: 'Open Sans', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--english-font);
+            background-color: var(--cornsilk);
+            color: var(--pakistan-green);
+            line-height: 1.8;
+            overflow-x: hidden;
+            transition: var(--transition);
+            background-image: url('https://www.transparenttextures.com/patterns/concrete-wall-2.png');
+        }
+        
+        body[dir="rtl"] {
+            font-family: var(--arabic-font);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: var(--pakistan-green);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--pakistan-green);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .preloader-logo {
+            font-size: 3rem;
+            color: var(--earth-yellow);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .preloader-logo i {
+            margin-right: 15px;
+            color: var(--cornsilk);
+        }
+        
+        .preloader-progress {
+            width: 300px;
+            height: 5px;
+            background: rgba(254, 250, 224, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .preloader-progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--earth-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        /* Particles background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.97);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--earth-yellow);
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tigers-eye);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--dark-moss-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--pakistan-green);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--earth-yellow);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--earth-yellow);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(221, 161, 94, 0.15);
+            border-radius: 30px;
+            padding: 5px;
+            margin-left: 20px;
+        }
+        
+        .lang-btn {
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: var(--earth-yellow);
+            color: var(--pakistan-green);
+        }
+        
+        /* Enhanced Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: all 1.5s ease;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(40, 54, 24, 0.7);
+            transition: opacity 1s ease;
+        }
+
+        .hero-slide.active::before {
+            opacity: 0.5;
+        }
+
+        .hero-slide:nth-child(1) {
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5401d865e4b071fa0604eef9/1626726825398-MRNW9RZ5ZKXMS8MO5CVO/Khartoum%2C+Sudan.jpeg');
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .hero-slide:nth-child(2) {
+            background-image: url('https://www.travel-tramp.com/wp-content/uploads/2024/05/Places-to-visit-in-Sudan-2-1-1024x683.jpg.webp');
+        }
+
+        .hero-slide:nth-child(3) {
+            background-image: url('https://intro.africa/wp-content/uploads/2020/05/Nubian4.jpg');
+        }
+
+        .hero-slide:nth-child(4) {
+            background-image: url('https://www.worldtravelguide.net/wp-content/uploads/2017/04/Think-Sudan-MeroePyramids-118344388-urosr-copy.jpg');
+            grid-column: span 2;
+        }
+
+        .hero-slide:nth-child(5) {
+            background-image: url('https://www.blueforcefleet.com/wp-content/uploads/sudan-diving-sanganeb-lighthouse.jpg');
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 2;
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .hero h1 {
+            font-size: 4.2rem;
+            margin-bottom: 20px;
+            color: var(--cornsilk);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--earth-yellow);
+            color: var(--pakistan-green);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            border: 2px solid var(--earth-yellow);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(221, 161, 94, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--earth-yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--earth-yellow);
+            border: 2px solid var(--earth-yellow);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--earth-yellow);
+            color: var(--pakistan-green);
+        }
+        
+        /* Floating Animation */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--dark-moss-green);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--earth-yellow);
+            border-radius: 3px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.3rem;
+            color: var(--pakistan-green);
+        }
+        
+        /* Culture Section */
+        .culture-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .culture-text {
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .culture-text h3 {
+            color: var(--tigers-eye);
+            margin: 30px 0 20px;
+            font-size: 2rem;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .culture-text h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--earth-yellow);
+            border-radius: 50%;
+        }
+        
+        .culture-image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            perspective: 1000px;
+        }
+        
+        .culture-img {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .culture-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(40, 54, 24, 0.7), transparent);
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+        
+        .culture-img:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .culture-img:hover::before {
+            opacity: 0.3;
+        }
+        
+        .img-1 {
+            background-image: url('https://pbs.twimg.com/media/B1f2ovJCYAA6Oxb.jpg');
+        }
+        
+        .img-2 {
+            background-image: url('https://500wordsmag.com/wp-content/uploads/2018/10/bridal-dance-e1540980417147.jpg');
+        }
+        
+        .img-3 {
+            background-image: url('https://www.everyculture.com/images/ctc_04_img1027.jpg');
+        }
+        
+        .img-4 {
+            background-image: url('https://jallabiya.com/cdn/shop/articles/banner_d0207919-865b-4ef7-be54-206413cc41ac.jpg?v=1747543277&width=1100');
+            grid-column: span 2;
+            height: 200px;
+        }
+        
+        /* Resources Section */
+        .resources {
+            background-color: rgba(96, 108, 56, 0.08);
+            position: relative;
+        }
+        
+        .resources::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .resource-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease;
+        }
+        
+        .resource-card:hover .resource-img {
+            transform: scale(1.05);
+        }
+        
+        .resource-content {
+            padding: 30px;
+        }
+        
+        .resource-content h3 {
+            color: var(--dark-moss-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        
+        .resource-content h3 i {
+            margin-right: 10px;
+            color: var(--tigers-eye);
+            font-size: 1.6rem;
+        }
+        
+        /* Updated Figures Section */
+        .categories-tabs {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 0 8px 15px;
+            background: transparent;
+            border: 2px solid var(--earth-yellow);
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--pakistan-green);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--earth-yellow);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--pakistan-green);
+        }
+        
+        .tab-btn.active::before, .tab-btn:hover::before {
+            width: 100%;
+        }
+        
+        .tab-content {
+            margin-top: 30px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .figures-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .figure-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 100%;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        
+        .figure-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .figure-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--earth-yellow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .figure-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .figure-content h3 {
+            color: var(--dark-moss-green);
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+        }
+        
+        .figure-title {
+            color: var(--tigers-eye);
+            font-style: italic;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: block;
+        }
+        
+        .figure-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .achievements {
+            background: rgba(221, 161, 94, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid var(--earth-yellow);
+        }
+        
+        .achievements h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--tigers-eye);
+        }
+        
+        .achievements ul {
+            padding-left: 25px;
+        }
+        
+        .achievements li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        /* Industry Section */
+        .industry {
+            background-color: var(--pakistan-green);
+            color: var(--cornsilk);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .industry::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dark-wood.png');
+            opacity: 0.1;
+        }
+        
+        .industry-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            position: relative;
+        }
+        
+        .industry-text {
+            padding-right: 20px;
+        }
+        
+        .industry-text h3 {
+            color: var(--earth-yellow);
+            margin: 30px 0 20px;
+            font-size: 2rem;
+        }
+        
+        .industry-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .stat-box {
+            background: rgba(254, 250, 224, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(254, 250, 224, 0.2);
+            transition: var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+            background: rgba(254, 250, 224, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-box h4 {
+            font-size: 3rem;
+            color: var(--earth-yellow);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .stat-box p {
+            font-size: 1.2rem;
+        }
+        
+        .industry-image {
+            height: 550px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            transform: rotate(3deg);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .industry-image:hover {
+            transform: rotate(0deg);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+        }
+        
+        .industry-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(40, 54, 24, 0.2), rgba(221, 161, 94, 0.1));
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            background-color: rgba(188, 108, 37, 0.08);
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPDET5CZCf2jmRsipdXEkotisAoKLJFR1Z2Q&s');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            position: relative;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cardboard-flat.png');
+            opacity: 0.2;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            background-color: var(--earth-yellow);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -4px;
+            border-radius: 5px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 30px;
+            background-color: white;
+            color: var(--pakistan-green);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-content h3 {
+            color: var(--dark-moss-green);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background-color: var(--cornsilk);
+            border: 5px solid var(--earth-yellow);
+            top: 30px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(221, 161, 94, 0.5);
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -21px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -21px;
+        }
+        
+        .timeline-date {
+            position: absolute;
+            top: 22px;
+            font-weight: 700;
+            color: var(--tigers-eye);
+            font-size: 1.2rem;
+            width: 140px;
+            background: var(--cornsilk);
+            padding: 8px 15px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-date {
+            right: -160px;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-date {
+            left: -160px;
+            text-align: left;
+        }
+        
+        /* Improved for LTR */
+        body[dir="ltr"] .timeline-item:nth-child(odd) .timeline-date {
+            left: -160px;
+            right: auto;
+            text-align: left;
+        }
+        
+        body[dir="ltr"] .timeline-item:nth-child(even) .timeline-date {
+            right: -160px;
+            left: auto;
+            text-align: right;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--pakistan-green);
+            color: var(--cornsilk);
+            padding: 100px 0 40px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--earth-yellow), var(--tigers-eye), var(--earth-yellow));
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            color: var(--earth-yellow);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--earth-yellow);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            color: var(--earth-yellow);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--earth-yellow);
+        }
+        
+        .footer-links a:hover i {
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(254, 250, 224, 0.1);
+            border-radius: 50%;
+            color: var(--cornsilk);
+            transition: var(--transition);
+            font-size: 1.4rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--earth-yellow);
+            transform: translateY(-8px);
+            color: var(--pakistan-green);
+        }
+        
+        .footer-newsletter input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .footer-newsletter input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px var(--earth-yellow);
+        }
+        
+        .footer-newsletter input::placeholder {
+            color: #ccc;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            color: #aaa;
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--earth-yellow);
+            color: var(--pakistan-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            background: var(--tigers-eye);
+            color: var(--cornsilk);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .culture-content,
+            .industry-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .culture-text {
+                padding-right: 0;
+            }
+            
+            .industry-image {
+                height: 450px;
+                margin-top: 50px;
+                order: -1;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            /* Timeline adjustments */
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-date,
+            .timeline-item:nth-child(even) .timeline-date {
+                position: relative;
+                left: 0;
+                right: 0;
+                text-align: left;
+                width: 100%;
+                top: 0;
+                margin-bottom: 15px;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            body[dir="ltr"] .timeline-item:nth-child(odd) .timeline-date,
+            body[dir="ltr"] .timeline-item:nth-child(even) .timeline-date {
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .categories-tabs {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .tab-btn {
+                margin: 5px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .section-header p {
+                font-size: 1.1rem;
+            }
+
+            /* Hero slideshow adjustments */
+            .hero-slideshow {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(3, 1fr);
+            }
+
+            .hero-slide:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .hero-slide:nth-child(4) {
+                grid-column: span 1;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .stat-box {
+                padding: 20px;
+            }
+            
+            .stat-box h4 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+            
+            .timeline::after {
+                left: 18px;
+            }
+            
+            .timeline-item::after {
+                left: 4px;
+            }
+            
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            /* Hero slideshow adjustments */
+            .hero-slideshow {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 1fr);
+            }
+
+            .hero-slide:nth-child(1),
+            .hero-slide:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+    </style>
+
+</head>
+<body dir="rtl">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo">
+            <i class="fas fa-monument"></i>
+            <span id="preloader-text">تراث السودان</span>
+        </div>
+        <div class="preloader-progress">
+            <div class="preloader-progress-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-monument"></i>
+                    <span id="logo-text">تراث السودان</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#culture" id="nav-culture">الثقافة</a></li>
+                    <li><a href="#resources" id="nav-resources">الموارد</a></li>
+                    <li><a href="#figures" id="nav-figures">شخصيات بارزة</a></li>
+                    <li><a href="#industry" id="nav-industry">الصناعة والتجارة</a></li>
+                    <li><a href="#timeline" id="nav-timeline">التاريخ</a></li>
+                </ul>
+                <div class="language-toggle">
+                    <button class="lang-btn active" id="ar-btn">العربية</button>
+                    <button class="lang-btn" id="en-btn">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 id="hero-title">اكتشف قلب السودان</h1>
+            <p id="hero-subtitle">رحلة عبر الحضارات القديمة والثقافة الغنية والموارد الوفيرة لأرض التقاء النيلين الأزرق والأبيض</p>
+            <div class="hero-buttons">
+                <a href="#culture" class="btn floating" id="explore-heritage">استكشاف التراث</a>
+                <a href="#timeline" class="btn btn-outline floating" id="discover-history">اكتشاف التاريخ</a>
+                <a href="https://gaithashraf.github.io/traditions/" class="btn btn-outline floating" id="explore-traditions">استكشاف التقاليد</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="culture-title">الثقافة والتقاليد</h2>
+                <p id="culture-subtitle">نسيج السودان الثقافي يجمع بين أكثر من 500 مجموعة عرقية، لكل منها تقاليدها الفريدة</p>
+            </div>
+            <div class="culture-content">
+                <div class="culture-text">
+                    <h3 id="culture-heritage">تراث ثقافي غني</h3>
+                    <p id="culture-heritage-desc">تعكس الثقافة السودانية قرونًا من التأثيرات العربية والأفريقية والإسلامية. من الممالك النوبية القديمة إلى التقاليد الحديثة، تشمل التعبيرات الثقافية الموسيقى والرقص والحرف اليدوية والعادات الاجتماعية الفريدة.</p>
+                    
+                    <h3 id="culture-clothing">الملابس التقليدية</h3>
+                    <p id="culture-clothing-desc">"التوب" هو ثوب طويل فضفاض ترتديه النساء السودانيات، عادة ما يكون بطول 4-5 أمتار من القماش الملوّن الزاهي. يرتدي الرجال تقليديًا "الجلباب" - وهو رداء أبيض طويل - غالبًا مع عمامة أو "عمة".</p>
+                    
+                    <h3 id="culture-food">التقاليد الغذائية</h3>
+                    <p id="culture-food-desc">تشمل المأكولات السودانية أطعمة أساسية مثل "الفول المدمس" و"الكسرة" (خبز الذرة) و"العصيدة". تكون الوجبات جماعية، مع تجمع الناس حول صحون كبيرة مشتركة.</p>
+                    
+                    <h3 id="culture-music">الموسيقى والرقص</h3>
+                    <p id="culture-music-desc">تشمل الموسيقى التقليدية الأصوات الشجية لـ"الطنبور" (القيثارة) والطبول الإيقاعية. تظل طقوس "الزار" والدوران الصوفي تعبيرات روحية مهمة.</p>
+                </div>
+                <div class="culture-images">
+                    <div class="culture-image-grid">
+                        <div class="culture-img img-1"></div>
+                        <div class="culture-img img-2"></div>
+                        <div class="culture-img img-3"></div>
+                        <div class="culture-img img-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="resources-title">الكنوز الطبيعية</h2>
+                <p id="resources-subtitle">تضم تضاريس السودان المتنوعة موارد طبيعية وفيرة</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0EA9LwExEn9fQLlwAgOlvhoEsGJ-X-rpKYA&s');"></div>
+                    <div class="resource-content">
+                        <h3><i class="fas fa-gem"></i> <span id="resource-minerals">الثروة المعدنية</span></h3>
+                        <p id="resource-minerals-desc">السودان هو ثالث أكبر منتج للذهب في إفريقيا مع احتياطيات كبيرة في جبال البحر الأحمر والمناطق الشمالية. كما تمتلك البلاد رواسب كبيرة من الكروم والنحاس وخام الحديد والزنك.</p>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://sdistconsulate.com/wp-content/uploads/2025/04/agriculture-in-sudan-1024x495.jpeg');"></div>
+                    <div class="resource-content">
+                        <h3><i class="fas fa-tractor"></i> <span id="resource-agriculture">الموارد الزراعية</span></h3>
+                        <p id="resource-agriculture-desc">مع الأراضي الخصبة لنهر النيل، ينتج السودان 75٪ من صمغ العرب في العالم، إلى جانب القطن والسمسم والفول السوداني والذرة الرفيعة. تمتلك البلاد أكثر من 200 مليون فدان من الأراضي الصالحة للزراعة.</p>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://www.adfd.ae/images/34e90703/3200x1e00wTransparent.aspx');"></div>
+                    <div class="resource-content">
+                        <h3><i class="fas fa-water"></i> <span id="resource-water">المياه والطاقة</span></h3>
+                        <p id="resource-water-desc">يوفر نهر النيل موارد مائية حيوية. يمتلك السودان إمكانات كبيرة للطاقة الكهرومائية مع سدود مثل الروصيرس ومروي التي تولد الكهرباء. إمكانات الطاقة الشمسية من بين الأعلى في إفريقيا.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Figures Section -->
+    <section id="figures">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="figures-title">شخصيات سودانية بارزة</h2>
+                <p id="figures-subtitle">رواد شكلوا المشهد الفكري والثقافي للسودان</p>
+            </div>
+            
+            <div class="categories-tabs">
+                <button class="tab-btn active" data-category="politics" id="tab-politics">السياسة والقيادة</button>
+                <button class="tab-btn" data-category="literature" id="tab-literature">الأدب</button>
+                <button class="tab-btn" data-category="art" id="tab-art">الفن والموسيقى</button>
+                <button class="tab-btn" data-category="sports" id="tab-sports">الرياضة</button>
+                <button class="tab-btn" data-category="religion" id="tab-religion">الشخصيات الدينية</button>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Politics and Leadership -->
+                <div class="tab-pane active" id="politics">
+                    <div class="figures-container">
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-politics-1-name">عبد الفتاح البرهان</h3>
+                                <div class="figure-title" id="figure-politics-1-title">(مواليد 1960)</div>
+                                <p id="figure-politics-1-desc">رئيس مجلس السيادة الانتقالي في السودان منذ 2019، وقائد عسكري سوداني.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-politics-1-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-politics-1-achievement-1">قاد المجلس العسكري الانتقالي بعد الإطاحة بالرئيس عمر البشير</li>
+                                        <li id="figure-politics-1-achievement-2">قاد عملية الانتقال السياسي في السودان</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-politics-2-name">المهدي محمد أحمد</h3>
+                                <div class="figure-title" id="figure-politics-2-title">(1844–1885)</div>
+                                <p id="figure-politics-2-desc">زعيم الثورة المهدية ضد الحكم التركي المصري، أسس الدولة المهدية في السودان عام 1885.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-politics-2-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-politics-2-achievement-1">قاد الثورة المهدية ضد الحكم الأجنبي</li>
+                                        <li id="figure-politics-2-achievement-2">أسس الدولة المهدية في السودان</li>
+                                        <li id="figure-politics-2-achievement-3">قاد معركة الخرطوم الشهيرة</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-politics-3-name">إسماعيل الأزهري</h3>
+                                <div class="figure-title" id="figure-politics-3-title">(1900–1969)</div>
+                                <p id="figure-politics-3-desc">أول رئيس وزراء للسودان بعد الاستقلال وأول رئيس للجمهورية السودانية.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-politics-3-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-politics-3-achievement-1">قاد حركة الاستقلال السوداني</li>
+                                        <li id="figure-politics-3-achievement-2">أول رئيس وزراء للسودان المستقل</li>
+                                        <li id="figure-politics-3-achievement-3">أسس حزب الأشقاء</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-politics-4-name">جعفر النميري</h3>
+                                <div class="figure-title" id="figure-politics-4-title">(1930–2009)</div>
+                                <p id="figure-politics-4-desc">رئيس السودان من 1969 إلى 1985، قام بانقلاب عسكري وأدخل التعديلات الدستورية.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-politics-4-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-politics-4-achievement-1">أطاح بحكومة إسماعيل الأزهري</li>
+                                        <li id="figure-politics-4-achievement-2">حكم السودان لمدة 16 عامًا</li>
+                                        <li id="figure-politics-4-achievement-3">وقع اتفاقية أديس أبابا لإنهاء الحرب الأهلية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Literature -->
+                <div class="tab-pane" id="literature">
+                    <div class="figures-container">
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-literature-1-name">الطيب صالح</h3>
+                                <div class="figure-title" id="figure-literature-1-title">(1929–2009)</div>
+                                <p id="figure-literature-1-desc">كاتب وروائي سوداني، مؤلف رواية "موسم الهجرة إلى الشمال" التي تعد من أهم الروايات العربية.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-literature-1-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-literature-1-achievement-1">أشهر أعماله: "عرس الزين" و"موسم الهجرة إلى الشمال"</li>
+                                        <li id="figure-literature-1-achievement-2">ترجمت أعماله إلى أكثر من 30 لغة</li>
+                                        <li id="figure-literature-1-achievement-3">حصل على العديد من الجوائز الأدبية العالمية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-literature-2-name">محمد المهدي مجذوب</h3>
+                                <div class="figure-title" id="figure-literature-2-title">(1918–1982)</div>
+                                <p id="figure-literature-2-desc">شاعر وصحفي سوداني، من رواد الشعر الحديث في السودان والعالم العربي.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-literature-2-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-literature-2-achievement-1">أشهر دواوينه: "أغاني الأيام السبعة"</li>
+                                        <li id="figure-literature-2-achievement-2">شارك في تأسيس مجلة "الفجر" الأدبية</li>
+                                        <li id="figure-literature-2-achievement-3">عُرف بشعره الوطني والاجتماعي</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-literature-3-name">محمد الفيتوري</h3>
+                                <div class="figure-title" id="figure-literature-3-title">(1936–2015)</div>
+                                <p id="figure-literature-3-desc">شاعر سوداني معاصر، تميز شعره بالثورية والتمرد على الأوضاع الاجتماعية والسياسية.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-literature-3-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-literature-3-achievement-1">أشهر دواوينه: "أغاني إفريقيا" و"عاشق من إفريقيا"</li>
+                                        <li id="figure-literature-3-achievement-2">حصل على جائزة الملك فيصل العالمية للأدب</li>
+                                        <li id="figure-literature-3-achievement-3">تم تجريده من الجنسية السودانية عام 1974</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Art and Music -->
+                <div class="tab-pane" id="art">
+                    <div class="figures-container">
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-art-1-name">محمد وردي</h3>
+                                <div class="figure-title" id="figure-art-1-title">(1932–2012)</div>
+                                <p id="figure-art-1-desc">فنان سوداني، يعد من أشهر مغني السودان، لقب بـ"فنان أفريقيا الأول".</p>
+                                <div class="achievements">
+                                    <h4 id="figure-art-1-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-art-1-achievement-1">غنى أكثر من 300 أغنية</li>
+                                        <li id="figure-art-1-achievement-2">حصل على وسام العلوم والفنون من السودان</li>
+                                        <li id="figure-art-1-achievement-3">مثل السودان في العديد من المهرجانات العالمية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-art-2-name">عثمان حسين</h3>
+                                <div class="figure-title" id="figure-art-2-title">(1925–2005)</div>
+                                <p id="figure-art-2-desc">موسيقي وملحن سوداني، من رواد الموسيقى السودانية الحديثة.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-art-2-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-art-2-achievement-1">قام بتلحين العديد من الأغاني الوطنية</li>
+                                        <li id="figure-art-2-achievement-2">أسس فرقة "الرعيل الأول" الموسيقية</li>
+                                        <li id="figure-art-2-achievement-3">ساهم في تطوير الأغنية السودانية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-art-3-name">صلاح بن البادية</h3>
+                                <div class="figure-title" id="figure-art-3-title">(مواليد 1939)</div>
+                                <p id="figure-art-3-desc">مغني وملحن سوداني، من أشهر الفنانين في السودان والوطن العربي.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-art-3-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-art-3-achievement-1">اشتهر بأغنية "يا حبيبي يا نور العين"</li>
+                                        <li id="figure-art-3-achievement-2">شارك في العديد من المهرجانات العربية</li>
+                                        <li id="figure-art-3-achievement-3">حصل على جوائز عديدة في مجال الغناء</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sports -->
+                <div class="tab-pane" id="sports">
+                    <div class="figures-container">
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-sports-1-name">حسين الجزولي</h3>
+                                <div class="figure-title" id="figure-sports-1-title">(مواليد 1953)</div>
+                                <p id="figure-sports-1-desc">لاعب كرة قدم سوداني سابق، يعد من أفضل اللاعبين في تاريخ السودان.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-sports-1-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-sports-1-achievement-1">قائد المنتخب السوداني في السبعينات</li>
+                                        <li id="figure-sports-1-achievement-2">حصل على جائزة أفضل لاعب في إفريقيا عام 1973</li>
+                                        <li id="figure-sports-1-achievement-3">لعب لنادي الهلال السوداني معظم مسيرته</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-sports-2-name">نصر الدين عبيد</h3>
+                                <div class="figure-title" id="figure-sports-2-title">(مواليد 1982)</div>
+                                <p id="figure-sports-2-desc">عداء سوداني، متخصص في سباقات المسافات المتوسطة والطويلة.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-sports-2-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-sports-2-achievement-1">حصل على ميداليات في البطولات الإفريقية</li>
+                                        <li id="figure-sports-2-achievement-2">مثل السودان في الأولمبياد</li>
+                                        <li id="figure-sports-2-achievement-3">حطم العديد من الأرقام القياسية المحلية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Religious Figures -->
+                <div class="tab-pane" id="religion">
+                    <div class="figures-container">
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-religion-1-name">محمد أحمد المهدي</h3>
+                                <div class="figure-title" id="figure-religion-1-title">(1844–1885)</div>
+                                <p id="figure-religion-1-desc">زعيم ديني وسياسي، أسس الحركة المهدية في السودان وقاد الثورة ضد الحكم التركي المصري.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-religion-1-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-religion-1-achievement-1">أعلن نفسه المهدي المنتظر عام 1881</li>
+                                        <li id="figure-religion-1-achievement-2">قاد الثورة المهدية ضد الحكم العثماني</li>
+                                        <li id="figure-religion-1-achievement-3">أسس الدولة المهدية في السودان</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="figure-card">
+                            <div class="figure-content">
+                                <h3 id="figure-religion-2-name">عبد الرحمن المهدي</h3>
+                                <div class="figure-title" id="figure-religion-2-title">(1885–1959)</div>
+                                <p id="figure-religion-2-desc">زعيم سياسي وديني، ابن محمد أحمد المهدي، قاد الحركة الوطنية في السودان.</p>
+                                <div class="achievements">
+                                    <h4 id="figure-religion-2-achievements-title">إنجازات رئيسية:</h4>
+                                    <ul>
+                                        <li id="figure-religion-2-achievement-1">قاد حزب الأمة بعد وفاة والده</li>
+                                        <li id="figure-religion-2-achievement-2">دعم استقلال السودان عن بريطانيا ومصر</li>
+                                        <li id="figure-religion-2-achievement-3">أسس أنصار المهدي كقوة سياسية ودينية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Section -->
+    <section id="industry" class="industry">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="industry-title">الصناعة والتجارة</h2>
+                <p id="industry-subtitle">المشهد الاقتصادي المتطور للسودان</p>
+            </div>
+            <div class="industry-content">
+                <div class="industry-text">
+                    <h3 id="industry-overview">نظرة عامة على الاقتصاد</h3>
+                    <p id="industry-overview-desc">يتحول اقتصاد السودان من اقتصاد قائم على الزراعة إلى صناعات أكثر تنوعًا. مع الموارد الطبيعية الغنية والموقع الاستراتيجي، تمتلك البلاد إمكانات كبيرة للنمو الاقتصادي.</p>
+                    
+                    <h3 id="industry-main">الصناعات الرئيسية</h3>
+                    <p id="industry-main-desc">لا تزال الزراعة حيوية، حيث توظف أكثر من 80٪ من القوى العاملة. أصبح التعدين، وخاصة استخراج الذهب، مصدرًا رئيسيًا للدخل من الصادرات. تركز التصنيع على معالجة الأغذية والمنسوجات وإنتاج الأسمنت.</p>
+                    
+                    <h3 id="industry-trade">العلاقات التجارية</h3>
+                    <p id="industry-trade-desc">يصدر السودان الذهب والماشية والسمسم والقطن وصمغ العرب بشكل أساسي إلى الصين والإمارات العربية المتحدة والمملكة العربية السعودية. تشمل الواردات الرئيسية الآلات والمركبات والأدوية من الصين والهند ومصر.</p>
+                    
+                    <div class="industry-stats">
+                        <div class="stat-box">
+                            <h4>75%</h4>
+                            <p id="stat-1">من صمغ العرب في العالم</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>الثالث</h4>
+                            <p id="stat-2">منتج للذهب في إفريقيا</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>93.7%</h4>
+                            <p id="stat-3">من الأراضي صالحة للزراعة</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>200M+</h4>
+                            <p id="stat-4">عدد الماشية</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="industry-image" style="background-image: url('https://cdn.britannica.com/69/144669-050-6FBF3075/Container-terminal-Port-Sudan.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="timeline-title">الجدول الزمني التاريخي</h2>
+                <p id="timeline-subtitle">رحلة عبر النسيج التاريخي الغني للسودان</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date" id="timeline-date-1">2500-1500 ق.م</div>
+                    <div class="timeline-content">
+                        <h3 id="timeline-title-1">مملكة كوش</h3>
+                        <p id="timeline-desc-1">حضارة نوبية حكمت على طول النيل. تشتهر بأهراماتها في مروي وببراعتها العسكرية التي غزت مصر خلال الأسرة الخامسة والعشرين.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" id="timeline-date-2">350-1500 م</div>
+                    <div class="timeline-content">
+                        <h3 id="timeline-title-2">النوبة المسيحية</h3>
+                        <p id="timeline-desc-2">ازدهرت ثلاث ممالك مسيحية (نوباتيا ومقرة وعلوة) بفن وعمارة وتقاليد دينية مميزة على طول النيل.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" id="timeline-date-3">1504-1821</div>
+                    <div class="timeline-content">
+                        <h3 id="timeline-title-3">سلطنة الفونج</h3>
+                        <p id="timeline-desc-3">سلطنة إسلامية تأسست في سنار، عززت شبكات التجارة ومراكز العلم مثل جامعة سنار. اشتهرت بسلالة "السلطان الأزرق".</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" id="timeline-date-4">1881-1899</div>
+                    <div class="timeline-content">
+                        <h3 id="timeline-title-4">الثورة المهدية</h3>
+                        <p id="timeline-desc-4">ثورة إسلامية بقيادة محمد أحمد أنشأت دولة ثيوقراطية قصيرة العمر تقاوم القوى الاستعمارية، وتوجت بمعركة أم درمان.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" id="timeline-date-5">1956</div>
+                    <div class="timeline-content">
+                        <h3 id="timeline-title-5">الاستقلال</h3>
+                        <p id="timeline-desc-5">حصل السودان على استقلاله من الحكم الإنجليزي المصري، وبدأ عصرًا جديدًا كأكبر دولة في إفريقيا مع الخرطوم عاصمة لها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 id="footer-heritage">تراث السودان</h3>
+                    <p id="footer-desc">الحفاظ على التراث الثقافي والتاريخي والطبيعي الغني للسودان وتعزيزه للأجيال القادمة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footer-explore">استكشف</h3>
+                    <ul class="footer-links">
+                        <li><a href="#culture"><i class="fas fa-arrow-left"></i> <span id="footer-culture">الثقافة والتقاليد</span></a></li>
+                        <li><a href="#resources"><i class="fas fa-arrow-left"></i> <span id="footer-resources">الموارد الطبيعية</span></a></li>
+                        <li><a href="#figures"><i class="fas fa-arrow-left"></i> <span id="footer-figures">شخصيات بارزة</span></a></li>
+                        <li><a href="#industry"><i class="fas fa-arrow-left"></i> <span id="footer-industry">الصناعة والتجارة</span></a></li>
+                        <li><a href="#timeline"><i class="fas fa-arrow-left"></i> <span id="footer-timeline">الجدول الزمني التاريخي</span></a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footer-resources-title">موارد</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-book"></i> <span id="footer-museums">متاحف سودانية</span></a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> <span id="footer-research">أوراق بحثية</span></a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> <span id="footer-events">فعاليات ثقافية</span></a></li>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> <span id="footer-education">مواد تعليمية</span></a></li>
+                        <li><a href="#"><i class="fas fa-map-marked-alt"></i> <span id="footer-travel">دليل السفر</span></a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footer-contact">اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> <span id="footer-address">الخرطوم، السودان</span></a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> <span id="footer-phone">249+ 123 456 789</span></a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> <span id="footer-email">info@sudanheritage.org</span></a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> <span id="footer-website">www.sudanheritage.org</span></a></li>
+                    </ul>
+                    <div class="footer-newsletter">
+                        <input type="email" placeholder="بريدك الإلكتروني" id="newsletter-placeholder">
+                        <a href="#" class="btn" id="footer-subscribe">اشتراك</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="footer-copyright">© 2023 تراث السودان. جميع الحقوق محفوظة. | الاحتفاء بالإرث الثقافي الغني للسودان</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Translation object with Arabic and English versions
+        const translations = {
+            ar: {
+                "preloader": "تراث السودان",
+                "logo": "تراث السودان",
+                "nav-culture": "الثقافة",
+                "nav-resources": "الموارد",
+                "nav-figures": "شخصيات بارزة",
+                "nav-industry": "الصناعة والتجارة",
+                "nav-timeline": "التاريخ",
+                "hero-title": "اكتشف قلب السودان",
+                "hero-subtitle": "رحلة عبر الحضارات القديمة والثقافة الغنية والموارد الوفيرة لأرض التقاء النيلين الأزرق والأبيض",
+                "explore-heritage": "استكشاف التراث",
+                "discover-history": "اكتشاف التاريخ",
+                "explore-traditions": "استكشاف التقاليد",
+                "culture-title": "الثقافة والتقاليد",
+                "culture-subtitle": "نسيج السودان الثقافي يجمع بين أكثر من 500 مجموعة عرقية، لكل منها تقاليدها الفريدة",
+                "culture-heritage": "تراث ثقافي غني",
+                "culture-heritage-desc": "تعكس الثقافة السودانية قرونًا من التأثيرات العربية والأفريقية والإسلامية. من الممالك النوبية القديمة إلى التقاليد الحديثة، تشمل التعبيرات الثقافية الموسيقى والرقص والحرف اليدوية والعادات الاجتماعية الفريدة.",
+                "culture-clothing": "الملابس التقليدية",
+                "culture-clothing-desc": "\"التوب\" هو ثوب طويل فضفاض ترتديه النساء السودانيات، عادة ما يكون بطول 4-5 أمتار من القماش الملوّن الزاهي. يرتدي الرجال تقليديًا \"الجلباب\" - وهو رداء أبيض طويل - غالبًا مع عمامة أو \"عمة\".",
+                "culture-food": "التقاليد الغذائية",
+                "culture-food-desc": "تشمل المأكولات السودانية أطعمة أساسية مثل \"الفول المدمس\" و\"الكسرة\" (خبز الذرة) و\"العصيدة\". تكون الوجبات جماعية، مع تجمع الناس حول صحون كبيرة مشتركة.",
+                "culture-music": "الموسيقى والرقص",
+                "culture-music-desc": "تشمل الموسيقى التقليدية الأصوات الشجية لـ\"الطنبور\" (القيثارة) والطبول الإيقاعية. تظل طقوس \"الزار\" والدوران الصوفي تعبيرات روحية مهمة.",
+                "resources-title": "الكنوز الطبيعية",
+                "resources-subtitle": "تضم تضاريس السودان المتنوعة موارد طبيعية وفيرة",
+                "resource-minerals": "الثروة المعدنية",
+                "resource-minerals-desc": "السودان هو ثالث أكبر منتج للذهب في إفريقيا مع احتياطيات كبيرة في جبال البحر الأحمر والمناطق الشمالية. كما تمتلك البلاد رواسب كبيرة من الكروم والنحاس وخام الحديد والزنك.",
+                "resource-agriculture": "الموارد الزراعية",
+                "resource-agriculture-desc": "مع الأراضي الخصبة لنهر النيل، ينتج السودان 75٪ من صمغ العرب في العالم، إلى جانب القطن والسمسم والفول السوداني والذرة الرفيعة. تمتلك البلاد أكثر من 200 مليون فدان من الأراضي الصالحة للزراعة.",
+                "resource-water": "المياه والطاقة",
+                "resource-water-desc": "يوفر نهر النيل موارد مائية حيوية. يمتلك السودان إمكانات كبيرة للطاقة الكهرومائية مع سدود مثل الروصيرس ومروي التي تولد الكهرباء. إمكانات الطاقة الشمسية من بين الأعلى في إفريقيا.",
+                "figures-title": "شخصيات سودانية بارزة",
+                "figures-subtitle": "رواد شكلوا المشهد الفكري والثقافي للسودان",
+                "tab-politics": "السياسة والقيادة",
+                "tab-literature": "الأدب",
+                "tab-art": "الفن والموسيقى",
+                "tab-sports": "الرياضة",
+                "tab-religion": "الشخصيات الدينية",
+                "figure-politics-1-name": "عبد الفتاح البرهان",
+                "figure-politics-1-title": "(مواليد 1960)",
+                "figure-politics-1-desc": "رئيس مجلس السيادة الانتقالي في السودان منذ 2019، وقائد عسكري سوداني.",
+                "figure-politics-1-achievements-title": "إنجازات رئيسية:",
+                "figure-politics-1-achievement-1": "قاد المجلس العسكري الانتقالي بعد الإطاحة بالرئيس عمر البشير",
+                "figure-politics-1-achievement-2": "قاد عملية الانتقال السياسي في السودان",
+                "figure-politics-2-name": "المهدي محمد أحمد",
+                "figure-politics-2-title": "(1844–1885)",
+                "figure-politics-2-desc": "زعيم الثورة المهدية ضد الحكم التركي المصري، أسس الدولة المهدية في السودان عام 1885.",
+                "figure-politics-2-achievements-title": "إنجازات رئيسية:",
+                "figure-politics-2-achievement-1": "قاد الثورة المهدية ضد الحكم الأجنبي",
+                "figure-politics-2-achievement-2": "أسس الدولة المهدية في السودان",
+                "figure-politics-2-achievement-3": "قاد معركة الخرطوم الشهيرة",
+                "figure-politics-3-name": "إسماعيل الأزهري",
+                "figure-politics-3-title": "(1900–1969)",
+                "figure-politics-3-desc": "أول رئيس وزراء للسودان بعد الاستقلال وأول رئيس للجمهورية السودانية.",
+                "figure-politics-3-achievements-title": "إنجازات رئيسية:",
+                "figure-politics-3-achievement-1": "قاد حركة الاستقلال السوداني",
+                "figure-politics-3-achievement-2": "أول رئيس وزراء للسودان المستقل",
+                "figure-politics-3-achievement-3": "أسس حزب الأشقاء",
+                "figure-politics-4-name": "جعفر النميري",
+                "figure-politics-4-title": "(1930–2009)",
+                "figure-politics-4-desc": "رئيس السودان من 1969 إلى 1985، قام بانقلاب عسكري وأدخل التعديلات الدستورية.",
+                "figure-politics-4-achievements-title": "إنجازات رئيسية:",
+                "figure-politics-4-achievement-1": "أطاح بحكومة إسماعيل الأزهري",
+                "figure-politics-4-achievement-2": "حكم السودان لمدة 16 عامًا",
+                "figure-politics-4-achievement-3": "وقع اتفاقية أديس أبابا لإنهاء الحرب الأهلية",
+                "figure-literature-1-name": "الطيب صالح",
+                "figure-literature-1-title": "(1929–2009)",
+                "figure-literature-1-desc": "كاتب وروائي سوداني، مؤلف رواية \"موسم الهجرة إلى الشمال\" التي تعد من أهم الروايات العربية.",
+                "figure-literature-1-achievements-title": "إنجازات رئيسية:",
+                "figure-literature-1-achievement-1": "أشهر أعماله: \"عرس الزين\" و\"موسم الهجرة إلى الشمال\"",
+                "figure-literature-1-achievement-2": "ترجمت أعماله إلى أكثر من 30 لغة",
+                "figure-literature-1-achievement-3": "حصل على العديد من الجوائز الأدبية العالمية",
+                "figure-literature-2-name": "محمد المهدي مجذوب",
+                "figure-literature-2-title": "(1918–1982)",
+                "figure-literature-2-desc": "شاعر وصحفي سوداني، من رواد الشعر الحديث في السودان والعالم العربي.",
+                "figure-literature-2-achievements-title": "إنجازات رئيسية:",
+                "figure-literature-2-achievement-1": "أشهر دواوينه: \"أغاني الأيام السبعة\"",
+                "figure-literature-2-achievement-2": "شارك في تأسيس مجلة \"الفجر\" الأدبية",
+                "figure-literature-2-achievement-3": "عُرف بشعره الوطني والاجتماعي",
+                "figure-literature-3-name": "محمد الفيتوري",
+                "figure-literature-3-title": "(1936–2015)",
+                "figure-literature-3-desc": "شاعر سوداني معاصر، تميز شعره بالثورية والتمرد على الأوضاع الاجتماعية والسياسية.",
+                "figure-literature-3-achievements-title": "إنجازات رئيسية:",
+                "figure-literature-3-achievement-1": "أشهر دواوينه: \"أغاني إفريقيا\" و\"عاشق من إفريقيا\"",
+                "figure-literature-3-achievement-2": "حصل على جائزة الملك فيصل العالمية للأدب",
+                "figure-literature-3-achievement-3": "تم تجريده من الجنسية السودانية عام 1974",
+                "figure-art-1-name": "محمد وردي",
+                "figure-art-1-title": "(1932–2012)",
+                "figure-art-1-desc": "فنان سوداني، يعد من أشهر مغني السودان، لقب بـ\"فنان أفريقيا الأول\".",
+                "figure-art-1-achievements-title": "إنجازات رئيسية:",
+                "figure-art-1-achievement-1": "غنى أكثر من 300 أغنية",
+                "figure-art-1-achievement-2": "حصل على وسام العلوم والفنون من السودان",
+                "figure-art-1-achievement-3": "مثل السودان في العديد من المهرجانات العالمية",
+                "figure-art-2-name": "عثمان حسين",
+                "figure-art-2-title": "(1925–2005)",
+                "figure-art-2-desc": "موسيقي وملحن سوداني، من رواد الموسيقى السودانية الحديثة.",
+                "figure-art-2-achievements-title": "إنجازات رئيسية:",
+                "figure-art-2-achievement-1": "قام بتلحين العديد من الأغاني الوطنية",
+                "figure-art-2-achievement-2": "أسس فرقة \"الرعيل الأول\" الموسيقية",
+                "figure-art-2-achievement-3": "ساهم في تطوير الأغنية السودانية",
+                "figure-art-3-name": "صلاح بن البادية",
+                "figure-art-3-title": "(مواليد 1939)",
+                "figure-art-3-desc": "مغني وملحن سوداني، من أشهر الفنانين في السودان والوطن العربي.",
+                "figure-art-3-achievements-title": "إنجازات رئيسية:",
+                "figure-art-3-achievement-1": "اشتهر بأغنية \"يا حبيبي يا نور العين\"",
+                "figure-art-3-achievement-2": "شارك في العديد من المهرجانات العربية",
+                "figure-art-3-achievement-3": "حصل على جوائز عديدة في مجال الغناء",
+                "figure-sports-1-name": "حسين الجزولي",
+                "figure-sports-1-title": "(مواليد 1953)",
+                "figure-sports-1-desc": "لاعب كرة قدم سوداني سابق، يعد من أفضل اللاعبين في تاريخ السودان.",
+                "figure-sports-1-achievements-title": "إنجازات رئيسية:",
+                "figure-sports-1-achievement-1": "قائد المنتخب السوداني في السبعينات",
+                "figure-sports-1-achievement-2": "حصل على جائزة أفضل لاعب في إفريقيا عام 1973",
+                "figure-sports-1-achievement-3": "لعب لنادي الهلال السوداني معظم مسيرته",
+                "figure-sports-2-name": "نصر الدين عبيد",
+                "figure-sports-2-title": "(مواليد 1982)",
+                "figure-sports-2-desc": "عداء سوداني، متخصص في سباقات المسافات المتوسطة والطويلة.",
+                "figure-sports-2-achievements-title": "إنجازات رئيسية:",
+                "figure-sports-2-achievement-1": "حصل على ميداليات في البطولات الإفريقية",
+                "figure-sports-2-achievement-2": "مثل السودان في الأولمبياد",
+                "figure-sports-2-achievement-3": "حطم العديد من الأرقام القياسية المحلية",
+                "figure-religion-1-name": "محمد أحمد المهدي",
+                "figure-religion-1-title": "(1844–1885)",
+                "figure-religion-1-desc": "زعيم ديني وسياسي، أسس الحركة المهدية في السودان وقاد الثورة ضد الحكم التركي المصري.",
+                "figure-religion-1-achievements-title": "إنجازات رئيسية:",
+                "figure-religion-1-achievement-1": "أعلن نفسه المهدي المنتظر عام 1881",
+                "figure-religion-1-achievement-2": "قاد الثورة المهدية ضد الحكم العثماني",
+                "figure-religion-1-achievement-3": "أسس الدولة المهدية في السودان",
+                "figure-religion-2-name": "عبد الرحمن المهدي",
+                "figure-religion-2-title": "(1885–1959)",
+                "figure-religion-2-desc": "زعيم سياسي وديني، ابن محمد أحمد المهدي، قاد الحركة الوطنية في السودان.",
+                "figure-religion-2-achievements-title": "إنجازات رئيسية:",
+                "figure-religion-2-achievement-1": "قاد حزب الأمة بعد وفاة والده",
+                "figure-religion-2-achievement-2": "دعم استقلال السودان عن بريطانيا ومصر",
+                "figure-religion-2-achievement-3": "أسس أنصار المهدي كقوة سياسية ودينية",
+                "industry-title": "الصناعة والتجارة",
+                "industry-subtitle": "المشهد الاقتصادي المتطور للسودان",
+                "industry-overview": "نظرة عامة على الاقتصاد",
+                "industry-overview-desc": "يتحول اقتصاد السودان من اقتصاد قائم على الزراعة إلى صناعات أكثر تنوعًا. مع الموارد الطبيعية الغنية والموقع الاستراتيجي، تمتلك البلاد إمكانات كبيرة للنمو الاقتصادي.",
+                "industry-main": "الصناعات الرئيسية",
+                "industry-main-desc": "لا تزال الزراعة حيوية، حيث توظف أكثر من 80٪ من القوى العاملة. أصبح التعدين، وخاصة استخراج الذهب، مصدرًا رئيسيًا للدخل من الصادرات. تركز التصنيع على معالجة الأغذية والمنسوجات وإنتاج الأسمنت.",
+                "industry-trade": "العلاقات التجارية",
+                "industry-trade-desc": "يصدر السودان الذهب والماشية والسمسم والقطن وصمغ العرب بشكل أساسي إلى الصين والإمارات العربية المتحدة والمملكة العربية السعودية. تشمل الواردات الرئيسية الآلات والمركبات والأدوية من الصين والهند ومصر.",
+                "stat-1": "من صمغ العرب في العالم",
+                "stat-2": "منتج للذهب في إفريقيا",
+                "stat-3": "من الأراضي صالحة للزراعة",
+                "stat-4": "عدد الماشية",
+                "timeline-title": "الجدول الزمني التاريخي",
+                "timeline-subtitle": "رحلة عبر النسيج التاريخي الغني للسودان",
+                "timeline-date-1": "2500-1500 ق.م",
+                "timeline-title-1": "مملكة كوش",
+                "timeline-desc-1": "حضارة نوبية حكمت على طول النيل. تشتهر بأهراماتها في مروي وببراعتها العسكرية التي غزت مصر خلال الأسرة الخامسة والعشرين.",
+                "timeline-date-2": "350-1500 م",
+                "timeline-title-2": "النوبة المسيحية",
+                "timeline-desc-2": "ازدهرت ثلاث ممالك مسيحية (نوباتيا ومقرة وعلوة) بفن وعمارة وتقاليد دينية مميزة على طول النيل.",
+                "timeline-date-3": "1504-1821",
+                "timeline-title-3": "سلطنة الفونج",
+                "timeline-desc-3": "سلطنة إسلامية تأسست في سنار، عززت شبكات التجارة ومراكز العلم مثل جامعة سنار. اشتهرت بسلالة \"السلطان الأزرق\".",
+                "timeline-date-4": "1881-1899",
+                "timeline-title-4": "الثورة المهدية",
+                "timeline-desc-4": "ثورة إسلامية بقيادة محمد أحمد أنشأت دولة ثيوقراطية قصيرة العمر تقاوم القوى الاستعمارية، وتوجت بمعركة أم درمان.",
+                "timeline-date-5": "1956",
+                "timeline-title-5": "الاستقلال",
+                "timeline-desc-5": "حصل السودان على استقلاله من الحكم الإنجليزي المصري، وبدأ عصرًا جديدًا كأكبر دولة في إفريقيا مع الخرطوم عاصمة لها.",
+                "footer-heritage": "تراث السودان",
+                "footer-desc": "الحفاظ على التراث الثقافي والتاريخي والطبيعي الغني للسودان وتعزيزه للأجيال القادمة.",
+                "footer-explore": "استكشف",
+                "footer-culture": "الثقافة والتقاليد",
+                "footer-resources": "الموارد الطبيعية",
+                "footer-figures": "شخصيات بارزة",
+                "footer-industry": "الصناعة والتجارة",
+                "footer-timeline": "الجدول الزمني التاريخي",
+                "footer-resources-title": "موارد",
+                "footer-museums": "متاحف سودانية",
+                "footer-research": "أوراق بحثية",
+                "footer-events": "فعاليات ثقافية",
+                "footer-education": "مواد تعليمية",
+                "footer-travel": "دليل السفر",
+                "footer-contact": "اتصل بنا",
+                "footer-address": "الخرطوم، السودان",
+                "footer-phone": "249+ 123 456 789",
+                "footer-email": "info@sudanheritage.org",
+                "footer-website": "www.sudanheritage.org",
+                "newsletter-placeholder": "بريدك الإلكتروني",
+                "footer-subscribe": "اشتراك",
+                "footer-copyright": "© 2023 تراث السودان. جميع الحقوق محفوظة. | الاحتفاء بالإرث الثقافي الغني للسودان"
+            },
+            en: {
+                "preloader": "Sudan Heritage",
+                "logo": "Sudan Heritage",
+                "nav-culture": "Culture",
+                "nav-resources": "Resources",
+                "nav-figures": "Prominent Figures",
+                "nav-industry": "Industry & Trade",
+                "nav-timeline": "History",
+                "hero-title": "Discover the Heart of Sudan",
+                "hero-subtitle": "A journey through ancient civilizations, rich culture, and abundant resources of the land where the Blue and White Niles meet",
+                "explore-heritage": "Explore Heritage",
+                "discover-history": "Discover History",
+                "explore-traditions": "Explore Traditions",
+                "culture-title": "Culture & Traditions",
+                "culture-subtitle": "Sudan's cultural fabric combines over 500 ethnic groups, each with its unique traditions",
+                "culture-heritage": "Rich Cultural Heritage",
+                "culture-heritage-desc": "Sudanese culture reflects centuries of Arab, African, and Islamic influences. From ancient Nubian kingdoms to modern traditions, cultural expressions include music, dance, crafts, and unique social customs.",
+                "culture-clothing": "Traditional Clothing",
+                "culture-clothing-desc": "\"Toub\" is a long, loose garment worn by Sudanese women, typically 4-5 meters of brightly colored fabric. Men traditionally wear \"jalabiya\" - a long white robe - often with a turban or \"imma\".",
+                "culture-food": "Culinary Traditions",
+                "culture-food-desc": "Sudanese cuisine includes staple foods like \"ful medames\" (fava beans), \"kisra\" (sorghum bread), and \"aseeda\" (porridge). Meals are communal, with people gathering around large shared plates.",
+                "culture-music": "Music & Dance",
+                "culture-music-desc": "Traditional music features the soulful sounds of the \"tambur\" (harp) and rhythmic drums. \"Zar\" rituals and Sufi whirling remain important spiritual expressions.",
+                "resources-title": "Natural Treasures",
+                "resources-subtitle": "Sudan's diverse terrain encompasses abundant natural resources",
+                "resource-minerals": "Mineral Wealth",
+                "resource-minerals-desc": "Sudan is Africa's third-largest gold producer with significant reserves in the Red Sea Mountains and northern regions. The country also has substantial deposits of chromium, copper, iron ore, and zinc.",
+                "resource-agriculture": "Agricultural Resources",
+                "resource-agriculture-desc": "With the fertile lands of the Nile River, Sudan produces 75% of the world's gum arabic, along with cotton, sesame, peanuts, and sorghum. The country has over 200 million acres of arable land.",
+                "resource-water": "Water & Energy",
+                "resource-water-desc": "The Nile River provides vital water resources. Sudan has significant hydropower potential with dams like Roseires and Merowe generating electricity. Solar energy potential is among the highest in Africa.",
+                "figures-title": "Prominent Sudanese Figures",
+                "figures-subtitle": "Pioneers who shaped Sudan's intellectual and cultural landscape",
+                "tab-politics": "Politics & Leadership",
+                "tab-literature": "Literature",
+                "tab-art": "Art & Music",
+                "tab-sports": "Sports",
+                "tab-religion": "Religious Figures",
+                "figure-politics-1-name": "Abd al-Fattah al-Burhan",
+                "figure-politics-1-title": "(Born 1960)",
+                "figure-politics-1-desc": "Chairman of the Transitional Sovereignty Council of Sudan since 2019, and a Sudanese military commander.",
+                "figure-politics-1-achievements-title": "Key Achievements:",
+                "figure-politics-1-achievement-1": "Led the Transitional Military Council after the overthrow of President Omar al-Bashir",
+                "figure-politics-1-achievement-2": "Led the political transition process in Sudan",
+                "figure-politics-2-name": "Muhammad Ahmad",
+                "figure-politics-2-title": "(1844–1885)",
+                "figure-politics-2-desc": "Leader of the Mahdist Revolution against Turco-Egyptian rule, established the Mahdist state in Sudan in 1885.",
+                "figure-politics-2-achievements-title": "Key Achievements:",
+                "figure-politics-2-achievement-1": "Led the Mahdist Revolution against foreign rule",
+                "figure-politics-2-achievement-2": "Established the Mahdist state in Sudan",
+                "figure-politics-2-achievement-3": "Led the famous Battle of Khartoum",
+                "figure-politics-3-name": "Ismail al-Azhari",
+                "figure-politics-3-title": "(1900–1969)",
+                "figure-politics-3-desc": "First Prime Minister of Sudan after independence and first President of the Sudanese Republic.",
+                "figure-politics-3-achievements-title": "Key Achievements:",
+                "figure-politics-3-achievement-1": "Led the Sudanese independence movement",
+                "figure-politics-3-achievement-2": "First Prime Minister of independent Sudan",
+                "figure-politics-3-achievement-3": "Founded the National Unionist Party",
+                "figure-politics-4-name": "Gaafar Nimeiry",
+                "figure-politics-4-title": "(1930–2009)",
+                "figure-politics-4-desc": "President of Sudan from 1969 to 1985, staged a military coup and introduced constitutional amendments.",
+                "figure-politics-4-achievements-title": "Key Achievements:",
+                "figure-politics-4-achievement-1": "Overthrew the government of Ismail al-Azhari",
+                "figure-politics-4-achievement-2": "Ruled Sudan for 16 years",
+                "figure-politics-4-achievement-3": "Signed the Addis Ababa Agreement to end the civil war",
+                "figure-literature-1-name": "Tayeb Salih",
+                "figure-literature-1-title": "(1929–2009)",
+                "figure-literature-1-desc": "Sudanese writer and novelist, author of \"Season of Migration to the North\", considered one of the most important Arabic novels.",
+                "figure-literature-1-achievements-title": "Key Achievements:",
+                "figure-literature-1-achievement-1": "Famous works: \"The Wedding of Zein\" and \"Season of Migration to the North\"",
+                "figure-literature-1-achievement-2": "His works translated into more than 30 languages",
+                "figure-literature-1-achievement-3": "Received numerous international literary awards",
+                "figure-literature-2-name": "Mohammed al-Mahdi al-Majdhub",
+                "figure-literature-2-title": "(1918–1982)",
+                "figure-literature-2-desc": "Sudanese poet and journalist, pioneer of modern poetry in Sudan and the Arab world.",
+                "figure-literature-2-achievements-title": "Key Achievements:",
+                "figure-literature-2-achievement-1": "Famous poetry collection: \"Songs of the Seven Days\"",
+                "figure-literature-2-achievement-2": "Co-founded the literary magazine \"Al-Fajr\"",
+                "figure-literature-2-achievement-3": "Known for his patriotic and social poetry",
+                "figure-literature-3-name": "Mohammed al-Fayturi",
+                "figure-literature-3-title": "(1936–2015)",
+                "figure-literature-3-desc": "Contemporary Sudanese poet, known for revolutionary poetry rebelling against social and political conditions.",
+                "figure-literature-3-achievements-title": "Key Achievements:",
+                "figure-literature-3-achievement-1": "Famous poetry collections: \"Songs of Africa\" and \"Lover from Africa\"",
+                "figure-literature-3-achievement-2": "Received the King Faisal International Prize for Arabic Literature",
+                "figure-literature-3-achievement-3": "Stripped of Sudanese citizenship in 1974",
+                "figure-art-1-name": "Mohammed Wardi",
+                "figure-art-1-title": "(1932–2012)",
+                "figure-art-1-desc": "Sudanese artist, considered one of Sudan's most famous singers, nicknamed \"Africa's Artist Number One\".",
+                "figure-art-1-achievements-title": "Key Achievements:",
+                "figure-art-1-achievement-1": "Sang more than 300 songs",
+                "figure-art-1-achievement-2": "Received the Order of Sciences and Arts from Sudan",
+                "figure-art-1-achievement-3": "Represented Sudan at numerous international festivals",
+                "figure-art-2-name": "Osman Hussein",
+                "figure-art-2-title": "(1925–2005)",
+                "figure-art-2-desc": "Sudanese musician and composer, pioneer of modern Sudanese music.",
+                "figure-art-2-achievements-title": "Key Achievements:",
+                "figure-art-2-achievement-1": "Composed many national songs",
+                "figure-art-2-achievement-2": "Founded the \"Al-Ra'il Al-Awwal\" musical band",
+                "figure-art-2-achievement-3": "Contributed to the development of Sudanese song",
+                "figure-art-3-name": "Salah Ibn Al-Badia",
+                "figure-art-3-title": "(Born 1939)",
+                "figure-art-3-desc": "Sudanese singer and composer, one of the most famous artists in Sudan and the Arab world.",
+                "figure-art-3-achievements-title": "Key Achievements:",
+                "figure-art-3-achievement-1": "Famous for the song \"Ya Habibi Ya Noor Al-Ain\"",
+                "figure-art-3-achievement-2": "Participated in many Arab festivals",
+                "figure-art-3-achievement-3": "Received numerous awards in singing",
+                "figure-sports-1-name": "Hussein Al-Jazuli",
+                "figure-sports-1-title": "(Born 1953)",
+                "figure-sports-1-desc": "Former Sudanese football player, considered one of the best players in Sudan's history.",
+                "figure-sports-1-achievements-title": "Key Achievements:",
+                "figure-sports-1-achievement-1": "Captain of the Sudanese national team in the 1970s",
+                "figure-sports-1-achievement-2": "Won African Footballer of the Year in 1973",
+                "figure-sports-1-achievement-3": "Played for Al-Hilal Club for most of his career",
+                "figure-sports-2-name": "Nasr Al-Deen Obeid",
+                "figure-sports-2-title": "(Born 1982)",
+                "figure-sports-2-desc": "Sudanese runner, specializing in middle and long distance races.",
+                "figure-sports-2-achievements-title": "Key Achievements:",
+                "figure-sports-2-achievement-1": "Won medals in African championships",
+                "figure-sports-2-achievement-2": "Represented Sudan in the Olympics",
+                "figure-sports-2-achievement-3": "Broke many local records",
+                "figure-religion-1-name": "Muhammad Ahmad",
+                "figure-religion-1-title": "(1844–1885)",
+                "figure-religion-1-desc": "Religious and political leader, founded the Mahdist movement in Sudan and led the revolution against Turco-Egyptian rule.",
+                "figure-religion-1-achievements-title": "Key Achievements:",
+                "figure-religion-1-achievement-1": "Declared himself the Mahdi (Guided One) in 1881",
+                "figure-religion-1-achievement-2": "Led the Mahdist Revolution against Ottoman rule",
+                "figure-religion-1-achievement-3": "Established the Mahdist state in Sudan",
+                "figure-religion-2-name": "Abd al-Rahman al-Mahdi",
+                "figure-religion-2-title": "(1885–1959)",
+                "figure-religion-2-desc": "Political and religious leader, son of Muhammad Ahmad al-Mahdi, led the national movement in Sudan.",
+                "figure-religion-2-achievements-title": "Key Achievements:",
+                "figure-religion-2-achievement-1": "Led the Umma Party after his father's death",
+                "figure-religion-2-achievement-2": "Supported Sudan's independence from Britain and Egypt",
+                "figure-religion-2-achievement-3": "Established Ansar al-Mahdi as a political and religious force",
+                "industry-title": "Industry & Trade",
+                "industry-subtitle": "Sudan's evolving economic landscape",
+                "industry-overview": "Economic Overview",
+                "industry-overview-desc": "Sudan's economy is transitioning from agriculture-based to more diversified industries. With rich natural resources and strategic location, the country has significant potential for economic growth.",
+                "industry-main": "Key Industries",
+                "industry-main-desc": "Agriculture remains vital, employing over 80% of the workforce. Mining, especially gold extraction, has become a major source of export income. Manufacturing focuses on food processing, textiles, and cement production.",
+                "industry-trade": "Trade Relations",
+                "industry-trade-desc": "Sudan primarily exports gold, livestock, sesame, cotton, and gum arabic to China, UAE, and Saudi Arabia. Main imports include machinery, vehicles, and pharmaceuticals from China, India, and Egypt.",
+                "stat-1": "of world's gum arabic",
+                "stat-2": "gold producer in Africa",
+                "stat-3": "of land suitable for agriculture",
+                "stat-4": "livestock",
+                "timeline-title": "Historical Timeline",
+                "timeline-subtitle": "Journey through Sudan's rich historical tapestry",
+                "timeline-date-1": "2500-1500 BC",
+                "timeline-title-1": "Kingdom of Kush",
+                "timeline-desc-1": "Nubian civilization ruling along the Nile. Famous for its pyramids at Meroe and military prowess that conquered Egypt during the 25th Dynasty.",
+                "timeline-date-2": "350-1500 AD",
+                "timeline-title-2": "Christian Nubia",
+                "timeline-desc-2": "Three Christian kingdoms (Nobatia, Makuria, Alodia) flourished with distinctive art, architecture, and religious traditions along the Nile.",
+                "timeline-date-3": "1504-1821",
+                "timeline-title-3": "Funj Sultanate",
+                "timeline-desc-3": "Islamic sultanate founded at Sennar, enhancing trade networks and centers of learning like Sennar University. Famous for the \"Blue Sultan\" dynasty.",
+                "timeline-date-4": "1881-1899",
+                "timeline-title-4": "Mahdist Revolution",
+                "timeline-desc-4": "Islamic revolution led by Muhammad Ahmad that established a short-lived theocratic state resisting colonial powers, culminating in the Battle of Omdurman.",
+                "timeline-date-5": "1956",
+                "timeline-title-5": "Independence",
+                "timeline-desc-5": "Sudan gained independence from Anglo-Egyptian rule, beginning a new era as Africa's largest country with Khartoum as its capital.",
+                "footer-heritage": "Sudan Heritage",
+                "footer-desc": "Preserving and promoting Sudan's rich cultural, historical, and natural heritage for future generations.",
+                "footer-explore": "Explore",
+                "footer-culture": "Culture & Traditions",
+                "footer-resources": "Natural Resources",
+                "footer-figures": "Prominent Figures",
+                "footer-industry": "Industry & Trade",
+                "footer-timeline": "Historical Timeline",
+                "footer-resources-title": "Resources",
+                "footer-museums": "Sudanese Museums",
+                "footer-research": "Research Papers",
+                "footer-events": "Cultural Events",
+                "footer-education": "Educational Materials",
+                "footer-travel": "Travel Guide",
+                "footer-contact": "Contact Us",
+                "footer-address": "Khartoum, Sudan",
+                "footer-phone": "+249 123 456 789",
+                "footer-email": "info@sudanheritage.org",
+                "footer-website": "www.sudanheritage.org",
+                "newsletter-placeholder": "Your Email",
+                "footer-subscribe": "Subscribe",
+                "footer-copyright": "© 2023 Sudan Heritage. All rights reserved. | Celebrating Sudan's rich cultural legacy"
+            }
+        };
+
+        // Function to translate the page
+        function translatePage(lang) {
+            // Update all translatable elements
+            for (const [key, value] of Object.entries(translations[lang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.tagName === 'INPUT') {
+                        element.placeholder = value;
+                    } else {
+                        element.textContent = value;
+                    }
+                }
+            }
+
+            // Update page direction and language
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', 
+                    (lang === 'ar' && btn.id === 'ar-btn') || 
+                    (lang === 'en' && btn.id === 'en-btn')
+                );
+            });
+        }
+
+        // Preloader simulation
+        const preloader = document.getElementById('preloader');
+        const progressBar = document.querySelector('.preloader-progress-bar');
+        const preloaderLogo = document.querySelector('.preloader-logo');
+        
+        // Simulate progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 10);
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                // Animate preloader out
+                gsap.to(preloaderLogo, {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.5,
+                    delay: 0.5
+                });
+                
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 1,
+                    delay: 1,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                    }
+                });
+            }
+            progressBar.style.width = progress + '%';
+        }, 200);
+        
+        // Animate preloader logo in
+        gsap.to(preloaderLogo, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.5
+        });
+        
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#dda15e"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.3,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#bc6c25",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+        
+        // Language toggle functionality
+        const enBtn = document.getElementById('en-btn');
+        const arBtn = document.getElementById('ar-btn');
+        const htmlElement = document.documentElement;
+        
+        // Set up language toggle
+        enBtn.addEventListener('click', () => {
+            translatePage('en');
+        });
+        
+        arBtn.addEventListener('click', () => {
+            translatePage('ar');
+        });
+        
+        // Tab switching functionality
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Get target category
+                    const category = btn.getAttribute('data-category');
+                    
+                    // Hide all tab panes
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+                    
+                    // Show target tab pane
+                    document.getElementById(category).classList.add('active');
+                });
+            });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect and animation
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+            
+            // Scroll to top button
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        // Scroll to top functionality
+        document.querySelector('.scroll-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Hero slideshow animation
+        function heroSlideshow() {
+            const slides = document.querySelectorAll('.hero-slide');
+            let current = 0;
+            
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 5000);
+        }
+
+        // Initialize GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate header in
+        gsap.to('header', {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 1.5,
+            ease: "power3.out"
+        });
+        
+        // Hero content animation
+        gsap.to('.hero-content', {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            delay: 1.8,
+            ease: "power3.out"
+        });
+        
+        // Section headers animation
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.from(header, {
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Culture section animation
+        gsap.from('.culture-text', {
+            scrollTrigger: {
+                trigger: '#culture',
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+        
+        gsap.from('.culture-img', {
+            scrollTrigger: {
+                trigger: '#culture',
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+        
+        // Resource cards animation
+        gsap.utils.toArray('.resource-card').forEach((card, index) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Figure cards animation
+        gsap.utils.toArray('.figure-card').forEach(card => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                scale: 1,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+        
+        // Industry stats animation
+        gsap.utils.toArray('.stat-box').forEach((box, index) => {
+            gsap.to(box, {
+                scrollTrigger: {
+                    trigger: box,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Timeline items animation
+        gsap.utils.toArray('.timeline-item').forEach(item => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Initialize tabs
+        setupTabs();
+
+        // Initialize hero slideshow
+        heroSlideshow();
+    </script>
+</body>
+</html>
